@@ -8,6 +8,8 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float maxHp = 50f;
     protected float currentHp;
     [SerializeField] private Image hpBar ;
+    [SerializeField] protected float enterDamage = 10f;
+    [SerializeField] protected float stayDamage = 1f;
 
     protected virtual void Start()
     {
