@@ -17,7 +17,6 @@ public abstract class Enemy : MonoBehaviour
         currentHp = maxHp;
         UpdateHpBar();
     }
-
     protected virtual void Update()
     {
         MoveToPlayer();

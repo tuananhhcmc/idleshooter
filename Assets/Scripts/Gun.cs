@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+using TMPro;
 
 public class Gun : MonoBehaviour
 {
@@ -11,9 +11,11 @@ public class Gun : MonoBehaviour
     private float nextShot;
     [SerializeField] private int maxAmmo = 36;
     public int currentAmmo;
+    [SerializeField] private TextMeshProUGUI ammoText;
     void Start()
     {
         currentAmmo = maxAmmo;
+        UpdateAmmoText();
     }
 
 
@@ -51,6 +53,7 @@ public class Gun : MonoBehaviour
             nextShot = Time.time + shotDelay;
             Instantiate(bulletPrefabs, firePos.position, firePos.rotation);
             currentAmmo--;
+            UpdateAmmoText();
         }
     }
 
@@ -59,6 +62,22 @@ public class Gun : MonoBehaviour
         if (Input.GetMouseButton(1) && currentAmmo < maxAmmo)
         {
             currentAmmo = maxAmmo;
+            UpdateAmmoText();
+        }
+    }
+
+    private void UpdateAmmoText()
+    {
+        if (ammoText != null)
+        {
+            if (currentAmmo > 0)
+            {
+                ammoText.text = currentAmmo.ToString();
+            }
+            else
+            {
+                ammoText.text = "Empty";
+            }
         }
     }
 }
