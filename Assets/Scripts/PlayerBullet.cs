@@ -15,6 +15,7 @@ public class PlayerBullet : MonoBehaviour
     {
         MoveBullet();
     }
+    
 
     void MoveBullet()   
     {
