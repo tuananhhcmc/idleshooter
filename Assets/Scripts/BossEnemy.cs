@@ -43,7 +43,13 @@ public class BossEnemy : Enemy
 
     private void BanDanVongTron()
     {
-        
+        const int bulletCount = 12;
+        float angleStep = 360f / bulletCount;
+        for (int i = 0; i < bulletCount; i++)
+        {
+            float angle = angleStep * i;    
+            Vector3 bulletDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
+        }
     }
 
     private void HoiMau()
