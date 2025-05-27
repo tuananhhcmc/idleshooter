@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 public class Player : MonoBehaviour
@@ -9,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxHp = 100f;
     private float currentHp;
     [SerializeField] private Image hpBar;
+    [SerializeField] private GameManager gameManager;
 
     private void Awake()
     {
@@ -23,24 +25,33 @@ public class Player : MonoBehaviour
         UpdateHpBar();
     }
 
+    private Vector2 _playerInput;
+    private void FixedUpdate()
+    {
+        MovePlayer();
+
+    }
 
     void Update()
     {
-        MovePlayer();
+        _playerInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameManager.PauseGameMenu();
+        }
     }
 
     void MovePlayer()
     {
-        Vector2 playerInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        rb.linearVelocity=playerInput.normalized*moveSpeed;
-        if (playerInput.x < 0)
+        rb.linearVelocity=_playerInput.normalized * (moveSpeed * Time.fixedDeltaTime);
+        if (_playerInput.x < 0)
         {
             sr.flipX = true;
-        }else if (playerInput.x > 0)
+        }else if (_playerInput.x > 0)
         {
             sr.flipX = false;
         }
-        if (playerInput != Vector2.zero)
+        if (_playerInput != Vector2.zero)
         {
             anim.SetBool("isRun", true);
         }
@@ -63,7 +74,7 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        gameManager.GameOverMenu();
     }
 
     private void UpdateHpBar()
