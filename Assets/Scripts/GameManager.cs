@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private AudioManager audioManager;
+    [SerializeField] private GameObject winMenu;
+    [SerializeField] private CinemachineCamera cam;
 
     void Start()
     {
@@ -22,6 +25,7 @@ public class GameManager : MonoBehaviour
         boss.SetActive(false);
         MainMenu();
         audioManager.StopAudioGame();
+        cam.Lens.OrthographicSize = 5f;
     }
     
     public void AddEnergy()
@@ -46,6 +50,7 @@ public class GameManager : MonoBehaviour
         enemySpawner.SetActive(false);
         gameUi.SetActive(false);
         audioManager.PlayBossAudio();
+        cam.Lens.OrthographicSize = 10f;
     }
 
     private void UpdateEnergyBar()
@@ -62,6 +67,7 @@ public class GameManager : MonoBehaviour
         mainMenu.SetActive(true);
         gameOverMenu.SetActive(false);
         pauseMenu.SetActive(false);
+        winMenu.SetActive(false);
         Time.timeScale = 0f;
     }
 
@@ -70,6 +76,7 @@ public class GameManager : MonoBehaviour
         gameOverMenu.SetActive(true);
         mainMenu.SetActive(false);
         pauseMenu.SetActive(false);
+        winMenu.SetActive(false);
         Time.timeScale = 0f;
     }
 
@@ -78,6 +85,7 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(true);
         mainMenu.SetActive(false);
         gameOverMenu.SetActive(false);
+        winMenu.SetActive(false);
         Time.timeScale = 0f;
     }
 
@@ -86,6 +94,7 @@ public class GameManager : MonoBehaviour
         mainMenu.SetActive(false);
         gameOverMenu.SetActive(false);
         pauseMenu.SetActive(false);
+        winMenu.SetActive(false);
         Time.timeScale = 1f;
         audioManager.PlayDefaultAudio();
     }
@@ -95,6 +104,15 @@ public class GameManager : MonoBehaviour
         mainMenu.SetActive(false);
         gameOverMenu.SetActive(false);
         pauseMenu.SetActive(false);
+        winMenu.SetActive(false);
         Time.timeScale = 1f;
+    }
+    public void WinGame()
+    {
+        mainMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
+        pauseMenu.SetActive(false);
+        winMenu.SetActive(true);
+        Time.timeScale = 0f;
     }
 }

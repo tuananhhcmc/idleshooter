@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
     void MovePlayer()
     {
         rb.linearVelocity=_playerInput.normalized * (moveSpeed * Time.fixedDeltaTime);
+        //rb.linearVelocity = _playerInput.normalized * moveSpeed;
         if (_playerInput.x < 0)
         {
             sr.flipX = true;

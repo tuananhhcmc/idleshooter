@@ -13,7 +13,7 @@ public class PlayerCollision : MonoBehaviour
         }
         else if (collision.CompareTag("Usb"))
         {
-            Debug.Log("cc");
+            gameManager.WinGame();
             Destroy(collision.gameObject);
         }
         else if (collision.CompareTag("Energy"))
