@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
         boss.SetActive(false);
         MainMenu();
         audioManager.StopAudioGame();
-        cam.Lens.OrthographicSize = 5f;
+        cam.Lens.OrthographicSize = 6f;
     }
     
     public void AddEnergy()
